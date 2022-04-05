@@ -15,16 +15,7 @@ class Celebrity(models.Model):
     age = models.PositiveIntegerField()
     birthday = models.CharField(max_length=15)
     deceased_at = models.CharField(max_length=15)
+    routines = models.Arrayfield()
 
     def __str__(self):
         return self.name
-
-class Routine(models.Model):
-    description = models.CharField()
-    time = models.CharField()
-    is_complete = models.BooleanField()
-    celebrity = models.ForeignKey('celebrities.Celebrity', on_delete=models.CASCADE)
-    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.time

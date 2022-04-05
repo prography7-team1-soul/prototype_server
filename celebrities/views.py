@@ -2,8 +2,10 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet, ReadOnlyModelViewSet
-from celebrities.models import Celebrity, Routine
-from celebrities.serializers import CelebritySerializer, RoutineSerializer
+from accounts.models import Routine
+from accounts.serializers import RoutineSerializer
+from celebrities.models import Celebrity
+from celebrities.serializers import CelebritySerializer
 
 
 class CelebrityViewSet(ReadOnlyModelViewSet):
