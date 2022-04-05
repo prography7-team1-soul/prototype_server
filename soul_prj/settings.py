@@ -46,6 +46,8 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
+    'celebrities',
+    'accounts',
 
 ]
 
