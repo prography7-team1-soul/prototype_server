@@ -95,9 +95,9 @@ WSGI_APPLICATION = 'soul_prj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'soul',
-        'USER': 'postgres',
-        'PASSWORD': 'soul12!3',
+        'NAME': env('NAME'),
+        'USER': env('USER'),
+        'PASSWORD': env('PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432',
     },

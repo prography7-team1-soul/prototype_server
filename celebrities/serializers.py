@@ -19,6 +19,7 @@ class CelebritySerializer(serializers.ModelSerializer):
             'wealth',
             'spouse',
             'children',
+            'routines',
             'age',
             'birthday',
             'deceased_at'

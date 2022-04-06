@@ -17,12 +17,9 @@ class Celebrity(models.Model):
     birthday = models.CharField(max_length=15)
     deceased_at = models.CharField(max_length=15)
     routines = ArrayField(
-        ArrayField(
             models.CharField(max_length=10, blank=True),
             size=8,
-        ),
-        size=8,
-    )
+        )
 
     def __str__(self):
         return self.name
