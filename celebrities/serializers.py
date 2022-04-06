@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from celebrities.models import Celebrity, Routine
+from celebrities.models import Celebrity
 
 
 class CelebritySerializer(serializers.ModelSerializer):
