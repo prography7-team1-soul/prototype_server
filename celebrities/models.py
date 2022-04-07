@@ -18,8 +18,8 @@ class Celebrity(models.Model):
     imitated_users = models.ManyToManyField(
         'accounts.User',
         through='accounts.ImitateUser',
-        through_fields=('user', 'celebrity'), )
-    routines = models.ManyToManyField('celebrities.Routine', related_name='imitated_user')
+        through_fields=('user', 'celebrity'), related_name='imitated_user')
+    routines = models.ManyToManyField('celebrities.Routine')
 
     def __str__(self):
         return self.name
