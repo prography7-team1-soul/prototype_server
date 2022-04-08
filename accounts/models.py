@@ -6,11 +6,8 @@ class User(models.Model):
     def __str__(self):
         return self.uuid
 
-class Routine(models.Model):
-    content = models.CharField(max_length=31)
+class UserRoutine(models.Model):
+    content = models.JSONField()
     is_completed = models.BooleanField(default=False)
     imitated_user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
     celebrity = models.ForeignKey('celebrities.Celebrity', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.content

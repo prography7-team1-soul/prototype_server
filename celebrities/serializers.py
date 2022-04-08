@@ -9,6 +9,7 @@ class CelebritySerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'name',
+            'english_name',
             'image',
             'job',
             'MBTI',
@@ -19,9 +20,21 @@ class CelebritySerializer(serializers.ModelSerializer):
             'wealth',
             'spouse',
             'children',
-            'routines',
+            'celebrity_routines',
             'age',
             'birthday',
             'deceased_at'
+        )
+
+class CelebritySummarizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Celebrity
+        fields = (
+            'id',
+            'name',
+            'english_name',
+            'image',
+            'job',
+            'nationality',
         )
 
