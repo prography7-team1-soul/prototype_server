@@ -86,8 +86,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'soul_prj.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

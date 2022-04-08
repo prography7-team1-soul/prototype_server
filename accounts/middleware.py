@@ -19,6 +19,5 @@ class UuidMiddleWare(object):
             if not uuid:
                 raise PermissionDenied()
             user = User.objects.get_or_create(uuid=uuid)
-            user
         response = self.get_response(request)
         return response
