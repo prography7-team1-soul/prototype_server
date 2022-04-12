@@ -17,4 +17,4 @@ RUN pip install gunicorn
 RUN python3 manage.py collectstatic --settings=soul_prj.settings.deploy
 
 EXPOSE 8000
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "soul_prj.wsgi.deploy:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "soul_prj.wsgi.develop:application"]
