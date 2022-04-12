@@ -6,13 +6,12 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/server
-      - ./static:/server/static
   nginx:
     image: nginx:latest
     ports:
       - "80:80"
     volumes:
       - ./static:/server/static
-      - ./nginx:/etc/nginx/nginx.conf
+      - ./nginx:/etc/nginx/conf.d
     depends_on:
       - web
