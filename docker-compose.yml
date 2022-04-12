@@ -16,4 +16,4 @@ services:
   volumes:
     - static-data:/server/static
 volumes:
-  static-data:
+ static-data:
