@@ -6,6 +6,7 @@ services:
    - "80:80"
   volumes:
    - ./nginx:/etc/nginx/conf.d
+   - static-data:/static
   depends_on:
    - web
  web:
@@ -13,4 +14,6 @@ services:
     context: .
     dockerfile: Dockerfile
   volumes:
-    - ./static:/server/static
+    - static-data:/server/static
+volumes:
+  static-data:
