@@ -24,7 +24,6 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'uuid',)
 
     def create(self, validated_data):
-        print('ss')
         header = self.context.get("request").headers
         uuid = header.get("uuid", None)
         validated_data["uuid"] = uuid

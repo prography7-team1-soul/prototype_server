@@ -13,7 +13,7 @@ class CelebrityJobSerializer(serializers.ModelSerializer):
         )
 
 class CelebritySerializer(serializers.ModelSerializer):
-    job = CelebrityJobSerializer(read_only=True, many=True)
+    job = CelebrityJobSerializer(read_only=True)
     class Meta:
         model = Celebrity
         fields = (
@@ -37,7 +37,7 @@ class CelebritySerializer(serializers.ModelSerializer):
         )
 
 class CelebritySummarizeSerializer(serializers.ModelSerializer):
-    job = CelebrityJobSerializer(read_only=True, many=True)
+    job = CelebrityJobSerializer(read_only=True)
     class Meta:
         model = Celebrity
         fields = (
@@ -48,4 +48,3 @@ class CelebritySummarizeSerializer(serializers.ModelSerializer):
             'job',
             'nationality',
         )
-

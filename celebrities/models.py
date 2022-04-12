@@ -5,7 +5,7 @@ class Celebrity(models.Model):
     name = models.CharField(max_length=15)
     english_name = models.CharField(max_length=31)
     image = models.ImageField()
-    job = models.ManyToManyField('celebrities.CelebrityJob')
+    job = models.ForeignKey('celebrities.CelebrityJob', on_delete=models.CASCADE)
     MBTI = models.CharField(max_length=7)
     nationality = models.CharField(max_length=15)
     introduction = models.TextField()
