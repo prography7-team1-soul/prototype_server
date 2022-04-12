@@ -6,6 +6,7 @@ from rest_framework.viewsets import GenericViewSet
 from accounts.models import UserRoutine, User
 from accounts.serializers import UserRoutineSerializer, UserSerializer
 
+
 class UserViewSet(mixins.CreateModelMixin,
                    mixins.RetrieveModelMixin,
                    GenericViewSet):
