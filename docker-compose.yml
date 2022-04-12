@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./:/server
+      - .:/server
       - ./static:/server/static
   nginx:
     image: nginx:latest
@@ -13,6 +13,6 @@ services:
       - "80:80"
     volumes:
       - ./static:/server/static
-      - ./nginx:/etc/nginx/conf.d
+      - ./nginx:/etc/nginx/nginx.conf
     depends_on:
       - web
