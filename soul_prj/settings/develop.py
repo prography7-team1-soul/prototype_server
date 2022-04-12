@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 WSGI_APPLICATION = 'soul_prj.wsgi.develop.application'
 
