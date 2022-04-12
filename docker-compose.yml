@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./:server
+      - ./:/server
       - ./static:/server/static
   nginx:
     image: nginx:latest
