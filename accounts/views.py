@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, status, mixins
 from rest_framework.response import Response
@@ -38,7 +39,17 @@ class UserRoutineViewSet(viewsets.ModelViewSet):
 
     @swagger_auto_schema(operation_description="모방해온 루틴 전체를 반환하는 API: 헤더에 uuid값만 넣어서 request")
     def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+        queryset = self.filter_queryset(self.get_queryset())
+        routines_serializer = self.get_serializer(queryset, many=True)
+        query = UserRoutine.objects.filter(imitated_user=request.user).first()
+        celebrity_name = query.celebrity
+        routine_count = UserRoutine.objects.filter(imitated_user=request.user, is_completed=False).count()
+        serializer = {
+            'routine_count': routine_count,
+            'celebrity_name': f'{celebrity_name}',
+            'routines':routines_serializer.data,
+        }
+        return Response(serializer)
 
     @swagger_auto_schema(operation_description="모방해온 루틴 각각을 수정하는 API: id값은 imitate해온 루틴의 id -> is_complete 변경시 사용")
     def update(self, request, *args, **kwargs):
