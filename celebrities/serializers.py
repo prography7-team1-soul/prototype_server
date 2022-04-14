@@ -27,6 +27,7 @@ class CelebritySerializer(serializers.ModelSerializer):
             'introduction',
             'body_spec',
             'education',
+            'wise_saying',
             'wealth',
             'spouse',
             'children',
