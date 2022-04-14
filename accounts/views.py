@@ -17,8 +17,8 @@ class UserRoutineViewSet(viewsets.ModelViewSet):
     queryset = UserRoutine.objects.all()
     serializer_class = UserRoutineSerializer
 
-    def get_queryset(self, request):
+    def get_queryset(self):
         if self.action == 'list':
-            return UserRoutine.objects.filter(imitated_user=request.user)
+            return UserRoutine.objects.filter(imitated_user=self.request.user)
         else:
             return UserRoutine.objects.all()
