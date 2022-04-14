@@ -36,6 +36,27 @@ class CelebritySerializer(serializers.ModelSerializer):
             'deceased_at',
             'tmi',
         )
+        read_only_fields = (
+            'id',
+            'name',
+            'english_name',
+            'image',
+            'job',
+            'MBTI',
+            'nationality',
+            'introduction',
+            'body_spec',
+            'education',
+            'wise_saying',
+            'wealth',
+            'spouse',
+            'children',
+            'celebrity_routines',
+            'age',
+            'birthday',
+            'deceased_at',
+            'tmi',
+        )
 
 class CelebritySummarizeSerializer(serializers.ModelSerializer):
     job = CelebrityJobSerializer(read_only=True)
