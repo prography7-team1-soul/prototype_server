@@ -5,7 +5,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from accounts.models import UserRoutine
 from celebrities.models import Celebrity
-from celebrities.serializers import CelebritySummarizeSerializer, CelebritySerializer
+from celebrities.serializers import CelebritySummarizeSerializer, CelebritySerializer, ImitateRoutineSerializer
 
 
 class CelebrityViewSet(ReadOnlyModelViewSet):
@@ -18,12 +18,10 @@ class CelebrityViewSet(ReadOnlyModelViewSet):
             return CelebritySerializer
 
     @action(detail=True, methods=['post'])
-    def routines(self, request, pk):
+    def imitate(self, request, pk):
         celebrity = Celebrity.objects.get(id=pk)
-        celebrity_routines = celebrity.celebrity_routines
-        for routine in celebrity_routines.items():
-            UserRoutine.objects.create(content=routine, imitated_user=request.user, celebrity=celebrity)
-        data = {
-            'result': 'success'
-        }
-        return Response(data,status.HTTP_201_CREATED)
+        serializer = ImitateRoutineSerializer(data=request.data, context={'request': request, 'pk': pk, 'celebrity':celebrity})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

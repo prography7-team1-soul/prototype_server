@@ -11,5 +11,5 @@ routine_router.register(r'routines', UserRoutineViewSet, basename='user_routines
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("", include(routine_router.urls)),
+    path("imitated/", include(routine_router.urls)),
 ]

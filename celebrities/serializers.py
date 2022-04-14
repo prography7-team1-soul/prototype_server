@@ -1,7 +1,6 @@
 from rest_framework import serializers
-
+from accounts.models import UserRoutine
 from celebrities.models import Celebrity, CelebrityJob
-
 
 class CelebrityJobSerializer(serializers.ModelSerializer):
     class Meta:
@@ -50,3 +49,23 @@ class CelebritySummarizeSerializer(serializers.ModelSerializer):
             'job',
             'nationality',
         )
+
+class ImitateRoutineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserRoutine
+        fields = (
+            'imitated_user',
+            'celebrity_name',
+        )
+        read_only_fields = (
+            'imitated_user',
+            'celebrity_name',
+        )
+
+    def create(self, validated_data):
+        celebrity = self.context.get('celebrity')
+        imitated_user = self.context.get('request').user
+        celebrity_routines = celebrity.celebrity_routines
+        for routine in celebrity_routines.items():
+            user = UserRoutine.objects.create(content=routine, imitated_user=imitated_user, celebrity=celebrity)
+        return user

@@ -16,3 +16,9 @@ class UserViewSet(mixins.CreateModelMixin,
 class UserRoutineViewSet(viewsets.ModelViewSet):
     queryset = UserRoutine.objects.all()
     serializer_class = UserRoutineSerializer
+
+    def get_queryset(self, request):
+        if self.action == 'list':
+            return UserRoutine.objects.filter(imitated_user=request.user)
+        else:
+            return UserRoutine.objects.all()

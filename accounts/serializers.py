@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from accounts.models import UserRoutine, User
-from celebrities.models import Celebrity
 
 
 class UserRoutineSerializer(serializers.ModelSerializer):
@@ -14,17 +13,12 @@ class UserRoutineSerializer(serializers.ModelSerializer):
             'imitated_user',
             'celebrity',
         )
-
-class CelebrityNicknameSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Celebrity
-        fields = (
-            'name',
-        )
+    def create(self, validated_data):
+        validated_data["imitated_user"] = self.context.get("request").user
+        return super().create(validated_data)
 
 class RoutineSummarizeSerializer(serializers.ModelSerializer):
     routines = UserRoutineSerializer(read_only=True, many=True)
-    celebrity = CelebrityNicknameSerializer(read_only=True)
     class Meta:
         model = UserRoutine
         fields = (
