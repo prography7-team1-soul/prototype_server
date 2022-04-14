@@ -34,7 +34,8 @@ class CelebritySerializer(serializers.ModelSerializer):
             'celebrity_routines',
             'age',
             'birthday',
-            'deceased_at'
+            'deceased_at',
+            'tmi',
         )
 
 class CelebritySummarizeSerializer(serializers.ModelSerializer):

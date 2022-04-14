@@ -11,7 +11,7 @@ class Celebrity(models.Model):
     introduction = models.TextField()
     body_spec = models.JSONField()
     education = models.CharField(max_length=63)
-    wise_saying = models.CharField(max_length=31)
+    wise_saying = models.JSONField()
     wealth = models.CharField(max_length=63)
     spouse = models.CharField(max_length=31)
     children = models.CharField(max_length=63)
@@ -19,6 +19,7 @@ class Celebrity(models.Model):
     birthday = models.CharField(max_length=31)
     deceased_at = models.CharField(max_length=31)
     celebrity_routines = models.JSONField()
+    tmi = models.TextField()
 
     def __str__(self):
         return self.name
