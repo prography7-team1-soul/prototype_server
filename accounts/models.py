@@ -1,16 +1,21 @@
 from django.db import models
 
 class User(models.Model):
-    uuid = models.CharField(max_length=65)
+    uuid = models.CharField(max_length=63, unique=True)
 
     def __str__(self):
         return self.uuid
 
-class Routine(models.Model):
-    content = models.CharField(max_length=31)
+class UserRoutine(models.Model):
+    content = models.JSONField()
     is_completed = models.BooleanField(default=False)
     imitated_user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
     celebrity = models.ForeignKey('celebrities.Celebrity', on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.content
+    @property
+    def celebrity_name(self):
+        return self.celebrity.name
+
+    @property
+    def imitated_user_name(self):
+        return self.imitated_user
