@@ -1,5 +1,6 @@
 from .base import *
 
+DEBUG = False
 # AWS Setting
 AWS_REGION = 'ap-northeast-2'
 AWS_STORAGE_BUCKET_NAME = '7th-team1-soul'
