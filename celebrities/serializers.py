@@ -96,6 +96,12 @@ class ImitateRoutineSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         celebrity = self.context.get('celebrity')
         imitated_user = self.context.get('request').user
+        user_routines = self.context.get('user_routines')
+
+        if user_routines != None:
+            if user_routines.celebrity == celebrity:
+                raise serializers.ValidationError('이미 선택한 셀럽이에요!')
+            raise serializers.ValidationError('이미 오늘 체험할 셀럽을 정했어요!')
 
         for celebrity_routine in celebrity.celebrity_routines.all():
             user = UserRoutine.objects.create(content=celebrity_routine.content, time = celebrity_routine.time, imitated_user=imitated_user, celebrity=celebrity)

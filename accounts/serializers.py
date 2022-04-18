@@ -8,6 +8,7 @@ class UserRoutineSerializer(serializers.ModelSerializer):
         model = UserRoutine
         fields = (
             'id',
+            'time',
             'content',
             'is_completed',
         )
