@@ -1,8 +1,6 @@
 # /server/Dockerfile
 FROM python:3.8
 
-ENV PYTHONUNBUFFERED 1
-
 RUN apt-get -y update
 RUN apt-get -y install vim
 

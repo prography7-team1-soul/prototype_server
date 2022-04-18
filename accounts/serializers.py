@@ -8,6 +8,7 @@ class UserRoutineSerializer(serializers.ModelSerializer):
         model = UserRoutine
         fields = (
             'id',
+            'time',
             'content',
             'is_completed',
         )
@@ -39,7 +40,10 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'uuid',)
 
     def create(self, validated_data):
-        header = self.context.get("request").headers
-        uuid = header.get("uuid", None)
+        request = self.context.get("request")
+        uuid = request.headers.get("uuid", None)
+        user = User.objects.filter(uuid=uuid).first()
+        if user:
+            raise serializers.ValidationError(detail='가입된 유저가 존재합니다.')
         validated_data["uuid"] = uuid
         return super().create(validated_data)
