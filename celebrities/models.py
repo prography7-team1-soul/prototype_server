@@ -12,17 +12,21 @@ class Celebrity(models.Model):
     body_spec = models.JSONField()
     education = models.CharField(max_length=63)
     wise_saying = models.JSONField()
-    wealth = models.CharField(max_length=63)
+    wealth = models.TextField()
     spouse = models.CharField(max_length=31)
-    children = models.CharField(max_length=63)
+    children = models.TextField()
     age = models.PositiveIntegerField()
     birthday = models.CharField(max_length=31)
     deceased_at = models.CharField(max_length=31)
-    celebrity_routines = models.JSONField()
+    celebrity_routines = models.ManyToManyField('celebrities.CelebrityRoutine')
     tmi = models.TextField()
 
     def __str__(self):
         return self.name
+
+class CelebrityRoutine(models.Model):
+    content = models.CharField(max_length=31)
+    time = models.CharField(max_length=7)
 
 class CelebrityJob(models.Model):
     name = models.CharField(max_length=15)

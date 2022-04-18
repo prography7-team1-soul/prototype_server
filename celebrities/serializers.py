@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from accounts.models import UserRoutine
-from celebrities.models import Celebrity, CelebrityJob
+from celebrities.models import Celebrity, CelebrityJob, CelebrityRoutine
+
 
 class CelebrityJobSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,8 +12,17 @@ class CelebrityJobSerializer(serializers.ModelSerializer):
             'text_color',
         )
 
+class CelebrityRoutineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CelebrityRoutine
+        fields = (
+            'id',
+            'time',
+            'content',
+        )
 class CelebritySerializer(serializers.ModelSerializer):
     job = CelebrityJobSerializer(read_only=True)
+    celebrity_routines = CelebrityRoutineSerializer(read_only=True, many=True)
     class Meta:
         model = Celebrity
         fields = (
@@ -86,7 +96,7 @@ class ImitateRoutineSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         celebrity = self.context.get('celebrity')
         imitated_user = self.context.get('request').user
-        celebrity_routines = celebrity.celebrity_routines
-        for routine in celebrity_routines.items():
-            user = UserRoutine.objects.create(content=routine, imitated_user=imitated_user, celebrity=celebrity)
+
+        for celebrity_routine in celebrity.celebrity_routines.all():
+            user = UserRoutine.objects.create(content=celebrity_routine.content, time = celebrity_routine.time, imitated_user=imitated_user, celebrity=celebrity)
         return user

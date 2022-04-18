@@ -10,12 +10,8 @@ class UserRoutineSerializer(serializers.ModelSerializer):
             'id',
             'content',
             'is_completed',
-            'imitated_user',
-            'celebrity',
         )
-        read_only_fields = (
-            'imitated_user',
-        )
+
     def create(self, validated_data):
         validated_data["imitated_user"] = self.context.get("request").user
         return super().create(validated_data)
