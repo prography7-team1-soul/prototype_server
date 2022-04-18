@@ -19,10 +19,13 @@ class Celebrity(models.Model):
     birthday = models.CharField(max_length=31)
     deceased_at = models.CharField(max_length=31)
     celebrity_routines = models.ManyToManyField('celebrities.CelebrityRoutine')
-    tmi = models.TextField()
+    tmi = models.ManyToManyField('celebrities.CelebrityTmi')
 
     def __str__(self):
         return self.name
+
+class CelebrityTmi(models.Model):
+    content = models.CharField(max_length=32)
 
 class CelebrityRoutine(models.Model):
     content = models.CharField(max_length=31)

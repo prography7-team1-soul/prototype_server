@@ -42,7 +42,9 @@ class UserRoutineViewSet(viewsets.ModelViewSet):
         queryset = self.filter_queryset(self.get_queryset())
         routines_serializer = self.get_serializer(queryset, many=True)
         query = queryset.first()
-        celebrity_name = query.celebrity
+        celebrity_name = None
+        if query:
+            celebrity_name = query.celebrity
         routine_count = UserRoutine.objects.filter(imitated_user=request.user, is_completed=False).count()
         serializer = {
             'routine_count': routine_count,
