@@ -7,7 +7,8 @@ class User(models.Model):
         return self.uuid
 
 class UserRoutine(models.Model):
-    content = models.JSONField()
+    content = models.CharField(max_length=31)
+    time = models.CharField(max_length=7)
     is_completed = models.BooleanField(default=False)
     imitated_user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
     celebrity = models.ForeignKey('celebrities.Celebrity', on_delete=models.CASCADE)

@@ -41,7 +41,7 @@ class UserRoutineViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         routines_serializer = self.get_serializer(queryset, many=True)
-        query = UserRoutine.objects.filter(imitated_user=request.user).first()
+        query = queryset.first()
         celebrity_name = query.celebrity
         routine_count = UserRoutine.objects.filter(imitated_user=request.user, is_completed=False).count()
         serializer = {
